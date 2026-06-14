@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LudoTrace — YOUR GAME. YOUR DATA.</title>
+  <meta name="description" content="LudoTrace captures what actually happens when you play — and makes that data useful.">
+  <meta property="og:title" content="LudoTrace — YOUR GAME. YOUR DATA.">
+  <meta property="og:description" content="LudoTrace captures what actually happens when you play — and makes that data useful.">
+  <meta property="og:type" content="website">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #12002e;
+      --cyan:    #00e5ff;
+      --magenta: #ff2d78;
+      --purple:  #c77dff;
+      --white:   #ffffff;
+      --grid:    rgba(255,255,255,0.04);
+      --rule:    rgba(255,255,255,0.08);
+      --dim:     rgba(255,255,255,0.5);
+      --muted:   rgba(255,255,255,0.45);
+      --font:    'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header, section, footer { position: relative; z-index: 1; }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 60px;
+    }
+
+    .wordmark {
+      font-size: clamp(52px, 11vw, 104px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 40px;
+    }
+
+    .wordmark .ludo  { color: var(--white); }
+    .wordmark .trace { color: var(--magenta); }
+
+    .signal {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+    }
+
+    .tagline {
+      margin-top: 36px;
+      font-size: clamp(10px, 1.8vw, 13px);
+      letter-spacing: 0.45em;
+      color: var(--cyan);
+      opacity: 0.8;
+      text-transform: uppercase;
+    }
+
+    /* ─── ONE-LINER ─────────────────────────────────────────── */
+
+    .oneliner {
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .oneliner p {
+      font-size: clamp(17px, 2.6vw, 26px);
+      line-height: 1.55;
+      max-width: 700px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ─── RULE ──────────────────────────────────────────────── */
+
+    .rule { border: none; border-top: 1px solid var(--rule); }
+
+    /* ─── SECTION LABEL ─────────────────────────────────────── */
+
+    .label {
+      font-size: 10px;
+      letter-spacing: 0.45em;
+      color: var(--cyan);
+      opacity: 0.55;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* ─── HOW IT WORKS ──────────────────────────────────────── */
+
+    .how {
+      padding: 80px 24px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--rule);
+    }
+
+    @media (max-width: 660px) {
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--rule); }
+      .step:last-child { border-bottom: none; }
+    }
+
+    .step {
+      padding: 40px 32px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .step:last-child { border-right: none; }
+
+    .step-num {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--cyan);
+      opacity: 0.45;
+      margin-bottom: 18px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ─── CURRENT MODS ──────────────────────────────────────── */
+
+    .mods {
+      padding: 80px 24px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mod-card {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--magenta);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .mod-game {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .mod-status {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--cyan);
+      opacity: 0.55;
+    }
+
+    .mod-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--font);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border: 1px solid currentColor;
+      display: inline-block;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .btn-nexus { color: var(--magenta); }
+    .btn-nexus:hover { background: var(--magenta); color: var(--bg); }
+
+    .btn-gh { color: var(--purple); }
+    .btn-gh:hover { background: var(--purple); color: var(--bg); }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+
+    footer {
+      padding: 40px 24px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer a {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.1s;
+    }
+
+    footer a:hover { opacity: 1; }
+
+    footer .dot {
+      font-size: 11px;
+      opacity: 0.2;
+    }
+
+    footer .oss {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─ HERO ──────────────────────────────────────────────── -->
+  <header class="hero">
+
+    <div class="wordmark">
+      <span class="ludo">LUDO</span><span class="trace">TRACE</span>
+    </div>
+
+    <!--
+      Heartbeat signal — geometry derived from brand SVGs in /.github/.
+      Triple-stroke: dark glow shadow · main cyan · faint highlight.
+      Markers: magenta diamonds + squares on peaks; fading purple on baseline.
+    -->
+    <svg class="signal" viewBox="0 0 1200 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- glow -->
+      <polyline
+        points="0,75 190,75 230,75 270,14 322,108 364,75 470,75 512,75 548,24 584,108 614,75 1200,75"
+        fill="none" stroke="#1a0050" stroke-width="12"
+        stroke-linejoin="miter" stroke-linecap="square"/>
+      <!-- main -->
+      <polyline
+        points="0,75 190,75 230,75 270,14 322,108 364,75 470,75 512,75 548,24 584,108 614,75 1200,75"
+        fill="none" stroke="#00e5ff" stroke-width="2.5"
+        stroke-linejoin="miter" stroke-linecap="square"/>
+      <!-- highlight -->
+      <polyline
+        points="0,75 190,75 230,75 270,14 322,108 364,75 470,75 512,75 548,24 584,108 614,75 1200,75"
+        fill="none" stroke="#a0f0ff" stroke-width="0.75" opacity="0.4"
+        stroke-linejoin="miter" stroke-linecap="square"/>
+
+      <!-- magenta markers: diamonds on peaks, squares on troughs -->
+      <polygon points="270,2 282,14 270,26 258,14"   fill="#ff2d78"/>
+      <rect x="541" y="17" width="14" height="14"    fill="#ff2d78" opacity="0.85"/>
+      <polygon points="322,96 334,108 322,120 310,108" fill="#ff2d78" opacity="0.7"/>
+      <rect x="577" y="96" width="14" height="14"    fill="#ff2d78" opacity="0.6"/>
+
+      <!-- purple markers: fading along baseline -->
+      <polygon points="470,63 482,75 470,87 458,75"  fill="#c77dff" opacity="0.8"/>
+      <rect x="155" y="68" width="14" height="14"    fill="#c77dff" opacity="0.5"/>
+      <polygon points="880,63 892,75 880,87 868,75"  fill="#c77dff" opacity="0.35"/>
+      <rect x="1080" y="68" width="14" height="14"   fill="#c77dff" opacity="0.22"/>
+    </svg>
+
+    <p class="tagline">Your game.&nbsp; Your data.</p>
+
+  </header>
+
+  <!-- ─ ONE-LINER ─────────────────────────────────────────── -->
+  <section class="oneliner">
+    <p>LudoTrace captures what actually happens when you play — and makes that data useful.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ─ HOW IT WORKS ──────────────────────────────────────── -->
+  <section class="how">
+    <p class="label">How it works</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01 /</div>
+        <div class="step-title">Install the mod</div>
+        <p class="step-desc">Drop it in your Data folder. No ESP, no MCM, no configuration. Recording starts the moment you load a save.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02 /</div>
+        <div class="step-title">Play normally</div>
+        <p class="step-desc">Every session writes a JSONL log — kills, quests, locations, inventory changes, SPECIAL deltas. Automatic. Invisible.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03 /</div>
+        <div class="step-title">Use the data</div>
+        <p class="step-desc">Paste it into an AI for coaching. Build a dashboard. Write a script. The log is plain text — it works with anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ─ CURRENT MODS ──────────────────────────────────────── -->
+  <section class="mods">
+    <p class="label">Current mods</p>
+    <div class="mod-card">
+      <div>
+        <div class="mod-game">Fallout 4</div>
+        <!-- update mod-status once a release version is tagged -->
+        <div class="mod-status">Active</div>
+      </div>
+      <div class="mod-links">
+        <!-- update href once the Nexus mod page is published -->
+        <a href="#" class="btn btn-nexus">Nexus Mods</a>
+        <a href="https://github.com/ludotrace/fallout4" class="btn btn-gh">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─ FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <a href="https://github.com/ludotrace">github.com/ludotrace</a>
+    <span class="dot">·</span>
+    <span class="oss">Open source</span>
+  </footer>
+
+</body>
+</html>
