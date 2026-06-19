@@ -224,6 +224,33 @@
     .btn-gh { color: var(--purple); }
     .btn-gh:hover { background: var(--purple); color: var(--bg); }
 
+    .btn-mods { color: var(--cyan); }
+    .btn-mods:hover { background: var(--cyan); color: var(--bg); }
+
+    .mod-contribute {
+      margin-top: 2px;
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--rule);
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .mod-contribute-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .mod-contribute-text strong {
+      color: var(--white);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
     /* ─── FOOTER ────────────────────────────────────────────── */
 
     footer {
@@ -342,11 +369,10 @@
 
   <!-- ─ CURRENT MODS ──────────────────────────────────────── -->
   <section class="mods">
-    <p class="label">Current mods</p>
+    <p class="label">Supported games</p>
     <div class="mod-card">
       <div>
         <div class="mod-game">Fallout 4</div>
-        <!-- update mod-status once a release version is tagged -->
         <div class="mod-status">Active</div>
       </div>
       <div class="mod-links">
@@ -354,11 +380,21 @@
         <a href="https://github.com/ludotrace/fallout4" class="btn btn-gh">GitHub</a>
       </div>
     </div>
+    <div class="mod-contribute">
+      <div class="mod-contribute-text">
+        <strong>Mods are open source.</strong> Any game that can write to a file can have a LudoTrace mod.
+      </div>
+      <div class="mod-links">
+        <a href="https://github.com/ludotrace/mods" class="btn btn-mods">Build a mod</a>
+      </div>
+    </div>
   </section>
 
   <!-- ─ FOOTER ─────────────────────────────────────────────── -->
   <footer>
     <a href="https://github.com/ludotrace">github.com/ludotrace</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/ludotrace/mods">mods</a>
     <span class="dot">·</span>
     <span class="oss">Open source</span>
   </footer>
