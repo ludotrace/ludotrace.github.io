@@ -40,6 +40,29 @@ Single scroll, in order: hero → one-liner → how it works (3 steps) → curre
 
 When adding a new game mod, add a card to the **current mods** section following the same pattern as the Fallout 4 card: left magenta border, game name, status, Nexus + GitHub buttons.
 
+## Client downloads
+
+The site doubles as the client binary host and update manifest server:
+
+```
+site/
+├── client/
+│   └── version.json      — update manifest; fetched by the client on startup
+└── downloads/
+    ├── ludotrace-mac-x64
+    ├── ludotrace-mac-arm64
+    ├── ludotrace.exe
+    └── ludotrace-linux
+```
+
+These files are written by the client release pipeline (GitHub Actions in `ludotrace/client`)
+on every semver tag. Only the current release's binaries are kept — each release overwrites
+the previous ones. Do not edit these files manually.
+
+See `client/SPEC.md → Auto-Update` for the full pipeline spec.
+
 ## Deployment
 
-Push to `main` — GitHub Pages deploys automatically. `.nojekyll` in the repo root prevents Jekyll processing.
+Push to `main` — GitHub Pages deploys automatically. `.nojekyll` in the repo root
+prevents Jekyll processing. The site is served at `ludotrace.com` via a
+Cloudflare-proxied CNAME — see `internal/custom-domain.md` for the setup.
