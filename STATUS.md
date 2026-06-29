@@ -25,5 +25,5 @@ Deployed via GitHub Pages. Source: `ludotrace.github.io/`.
 ## Designed, not yet implemented
 
 - Custom domain `ludotrace.com` — no `CNAME` file in repo; Cloudflare CNAME and GitHub Pages custom domain config not yet applied (tracked in `internal/features.md` → Infrastructure)
-- Client binary hosting — `downloads/` directory and binaries (`ludotrace.exe`, `ludotrace-mac-x64`, `ludotrace-mac-arm64`, `ludotrace-linux`) not present; written by client release pipeline on semver tag
-- Auto-update manifest — `client/version.json` not present; required by client auto-update feature before it can ship
+- Client binary hosting — `downloads/` directory present and committed; binaries (`ludotrace.exe`, `ludotrace-mac-x64`, `ludotrace-mac-arm64`, `ludotrace-linux`) not yet deployed; written by client release pipeline on semver tag
+- Auto-update manifest — `client/` directory present and committed; `client/version.json` not yet deployed; written by client release pipeline on semver tag
