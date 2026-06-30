@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "next_check_seconds": 86400,
+  "platforms": {
+    "darwin/amd64":  { "url": "https://ludotrace.com/downloads/ludotrace-mac-x64",   "sha256": "1195a19c08c9407feab954715c6e33592f513b62395d04fadc9edba98b7490cb" },
+    "darwin/arm64":  { "url": "https://ludotrace.com/downloads/ludotrace-mac-arm64",  "sha256": "198575cad4c349668f1ee7bb74ca167356c6853e739ba1431b0b1bf1ab1ff916" },
+    "windows/amd64": { "url": "https://ludotrace.com/downloads/ludotrace.exe",         "sha256": "2b2918a0997d60fb00bb0bc1f9d10e188193582c03f2861334ae6bf0db7b93b5" },
+    "linux/amd64":   { "url": "https://ludotrace.com/downloads/ludotrace-linux",       "sha256": "51ad0df0069de9a4989c01d84e2a7f9b3fdbdc3aa8c101f5a1af2b433ad01a31" }
+  }
+}
