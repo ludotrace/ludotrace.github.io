@@ -69,6 +69,9 @@ Push to `main` — GitHub Pages deploys automatically. `.nojekyll` in the repo r
 prevents Jekyll processing. The site is served at `ludotrace.com` via a
 Cloudflare-proxied CNAME — see `internal/custom-domain.md` for the setup.
 
+Pages config is `build_type: legacy` (no `.github/workflows`) — **keep it that way**. If a
+deploy fails, retry the build; don't change `build_type`. See `troubleshooting.md`.
+
 ## Issues & PRs
 
 GitHub, single remote (`github.com/ludotrace/ludotrace.github.io`). Issues and PRs both via `gh` (`gh issue create/list`, `gh pr create`) — pass `--repo ludotrace/ludotrace.github.io` if running outside a clone.
