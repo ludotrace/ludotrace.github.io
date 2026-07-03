@@ -28,6 +28,7 @@
       --dim:     rgba(255,255,255,0.5);
       --muted:   rgba(255,255,255,0.45);
       --font:    'Courier New', monospace;
+      --heartbeat-t: 4.2s;
     }
 
     html { scroll-behavior: smooth; }
@@ -81,6 +82,81 @@
       width: 100%;
       max-width: 100%;
       display: block;
+      overflow: visible; /* flags pop to scale(1.35); default SVG overflow:hidden would clip the topmost one */
+    }
+
+    /* heartbeat sweep — the org's finalized, locked synthwave motion design.
+       Persistent triple-stroke line never moves; only the beam + flags animate. */
+    .beam {
+      stroke: #a0f0ff;
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-dasharray: 22 1978;
+      filter: drop-shadow(0 0 5px #00e5ff) drop-shadow(0 0 13px #00e5ff);
+      animation: beam var(--heartbeat-t, 4.2s) linear infinite;
+    }
+
+    @keyframes beam {
+      0%   { stroke-dashoffset: 2000; opacity: 0; }
+      3%   { stroke-dashoffset: 2000; opacity: 0; }
+      5%   { stroke-dashoffset: 2000; opacity: 1; }
+      70%  { stroke-dashoffset: 1000; opacity: 1; }
+      73%  { stroke-dashoffset: 1000; opacity: 0; }
+      100% { stroke-dashoffset: 1000; opacity: 0; }
+    }
+
+    .flags {
+      animation: flagsout var(--heartbeat-t, 4.2s) linear infinite;
+    }
+
+    @keyframes flagsout {
+      0%   { opacity: 1; }
+      82%  { opacity: 1; }
+      93%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .flag {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .f1 { animation: f1 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f2 { animation: f2 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f3 { animation: f3 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f4 { animation: f4 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f5 { animation: f5 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f6 { animation: f6 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f7 { animation: f7 var(--heartbeat-t, 4.2s) ease-out infinite; }
+    .f8 { animation: f8 var(--heartbeat-t, 4.2s) ease-out infinite; }
+
+    /* pop% = beam-arrival behind the sweep, in true path-length order along the polyline
+       (sweep spans 5-70% of the cycle over the full path fraction 0-1.0). Each flag pops
+       to a bright flash (opacity 1) then settles to its own baseline-fade opacity — the
+       CSS animation drives opacity throughout, so it must reproduce each marker's original
+       SVG `opacity` attribute at rest instead of leaving every flag at full opacity. */
+    @keyframes f1 { 0%, 11% { opacity: 0; transform: scale(.3); } 13% { opacity: 1; transform: scale(1.35); } 18% { opacity: .5; transform: scale(1); } 100% { opacity: .5; transform: scale(1); } }
+    @keyframes f2 { 0%, 17% { opacity: 0; transform: scale(.3); } 19% { opacity: 1; transform: scale(1.35); } 24% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes f3 { 0%, 22% { opacity: 0; transform: scale(.3); } 24% { opacity: 1; transform: scale(1.35); } 29% { opacity: .7; transform: scale(1); } 100% { opacity: .7; transform: scale(1); } }
+    @keyframes f4 { 0%, 30% { opacity: 0; transform: scale(.3); } 32% { opacity: 1; transform: scale(1.35); } 37% { opacity: .8; transform: scale(1); } 100% { opacity: .8; transform: scale(1); } }
+    @keyframes f5 { 0%, 34% { opacity: 0; transform: scale(.3); } 36% { opacity: 1; transform: scale(1.35); } 41% { opacity: .85; transform: scale(1); } 100% { opacity: .85; transform: scale(1); } }
+    @keyframes f6 { 0%, 39% { opacity: 0; transform: scale(.3); } 41% { opacity: 1; transform: scale(1.35); } 46% { opacity: .6; transform: scale(1); } 100% { opacity: .6; transform: scale(1); } }
+    @keyframes f7 { 0%, 53% { opacity: 0; transform: scale(.3); } 55% { opacity: 1; transform: scale(1.35); } 60% { opacity: .35; transform: scale(1); } 100% { opacity: .35; transform: scale(1); } }
+    @keyframes f8 { 0%, 63% { opacity: 0; transform: scale(.3); } 65% { opacity: 1; transform: scale(1.35); } 70% { opacity: .22; transform: scale(1); } 100% { opacity: .22; transform: scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .beam, .flags, .flag { animation: none; }
+      .beam { display: none; }
+      .flags { opacity: 1; }
+      .flag { transform: none; }
+      .f1 { opacity: .5; }
+      .f2 { opacity: 1; }
+      .f3 { opacity: .7; }
+      .f4 { opacity: .8; }
+      .f5 { opacity: .85; }
+      .f6 { opacity: .6; }
+      .f7 { opacity: .35; }
+      .f8 { opacity: .22; }
     }
 
     .tagline {
@@ -305,8 +381,11 @@
 
     <!--
       Heartbeat signal — geometry derived from brand SVGs in /.github/.
-      Triple-stroke: dark glow shadow · main cyan · faint highlight.
+      Triple-stroke: dark glow shadow · main cyan · faint highlight (persistent, never moves).
       Markers: magenta diamonds + squares on peaks; fading purple on baseline.
+      Signature motion (the org's finalized, locked design): a beam sweeps the line once per ~4.2s loop, flags pop in
+      behind it in path-length order, hold, then dissolve together. Respects
+      prefers-reduced-motion (static line, all flags shown at their baseline opacity).
     -->
     <svg class="signal" viewBox="0 0 1200 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <!-- glow -->
@@ -325,17 +404,28 @@
         fill="none" stroke="#a0f0ff" stroke-width="0.75" opacity="0.4"
         stroke-linejoin="miter" stroke-linecap="square"/>
 
-      <!-- magenta markers: diamonds on peaks, squares on troughs -->
-      <polygon points="270,2 282,14 270,26 258,14"   fill="#ff2d78"/>
-      <rect x="541" y="17" width="14" height="14"    fill="#ff2d78" opacity="0.85"/>
-      <polygon points="322,96 334,108 322,120 310,108" fill="#ff2d78" opacity="0.7"/>
-      <rect x="577" y="96" width="14" height="14"    fill="#ff2d78" opacity="0.6"/>
+      <!-- sweep beam: fades in at position 0, travels the full line once per loop -->
+      <polyline class="beam" pathLength="1000"
+        points="0,75 190,75 230,75 270,14 322,108 364,75 470,75 512,75 548,24 584,108 614,75 1200,75"
+        fill="none"/>
 
-      <!-- purple markers: fading along baseline -->
-      <polygon points="470,63 482,75 470,87 458,75"  fill="#c77dff" opacity="0.8"/>
-      <rect x="155" y="68" width="14" height="14"    fill="#c77dff" opacity="0.5"/>
-      <polygon points="880,63 892,75 880,87 868,75"  fill="#c77dff" opacity="0.35"/>
-      <rect x="1080" y="68" width="14" height="14"   fill="#c77dff" opacity="0.22"/>
+      <!-- event flags: pop in behind the beam (true path-length order), hold, dissolve together.
+           Baseline-fade opacity per marker lives only in the .fN keyframes/reduced-motion CSS
+           below (an animation always wins over an SVG presentation attribute) -- no opacity
+           attribute here, to avoid a second, silently-driftable copy of the same value. -->
+      <g class="flags">
+        <!-- magenta markers: diamonds on peaks, squares on troughs -->
+        <polygon class="flag f2" points="270,2 282,14 270,26 258,14"   fill="#ff2d78"/>
+        <rect    class="flag f5" x="541" y="17" width="14" height="14" fill="#ff2d78"/>
+        <polygon class="flag f3" points="322,96 334,108 322,120 310,108" fill="#ff2d78"/>
+        <rect    class="flag f6" x="577" y="96" width="14" height="14" fill="#ff2d78"/>
+
+        <!-- purple markers: fading along baseline -->
+        <polygon class="flag f4" points="470,63 482,75 470,87 458,75"  fill="#c77dff"/>
+        <rect    class="flag f1" x="155" y="68" width="14" height="14" fill="#c77dff"/>
+        <polygon class="flag f7" points="880,63 892,75 880,87 868,75"  fill="#c77dff"/>
+        <rect    class="flag f8" x="1080" y="68" width="14" height="14" fill="#c77dff"/>
+      </g>
     </svg>
 
     <p class="tagline">Your game.&nbsp; Your data.</p>
