@@ -8,7 +8,8 @@ Static landing page for the LudoTrace org. Single `index.html`, no build step, n
 
 ## Brand
 
-Source assets live in the `brand/` repo (sibling to this one). Tokens:
+Source assets live in `internal/brand/` (a directory in the `internal` repo, not a
+separate repo). Tokens:
 
 | Token | Value | Use |
 |-------|-------|-----|
@@ -59,7 +60,8 @@ These files are written by the client release pipeline (GitHub Actions in `ludot
 on every semver tag. Only the current release's binaries are kept — each release overwrites
 the previous ones. Do not edit these files manually.
 
-See `client/SPEC.md → Auto-Update` for the full pipeline spec.
+See `internal/_bmad-output/implementation-artifacts/client-tray-and-lifecycle.md` for the full
+auto-update pipeline spec (`client/SPEC.md` was retired 2026-07-02).
 
 ## Deployment
 
