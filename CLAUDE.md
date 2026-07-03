@@ -61,7 +61,7 @@ on every semver tag. Only the current release's binaries are kept — each relea
 the previous ones. Do not edit these files manually.
 
 See `internal/_bmad-output/implementation-artifacts/client-tray-and-lifecycle.md` for the full
-auto-update pipeline spec (`client/SPEC.md` was retired 2026-07-02).
+auto-update pipeline spec.
 
 ## Deployment
 
