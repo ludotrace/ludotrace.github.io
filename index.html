@@ -333,6 +333,85 @@
       letter-spacing: 0.04em;
     }
 
+    /* ─── DOWNLOAD ──────────────────────────────────────────── */
+
+    .download {
+      padding: 80px 24px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-download { color: var(--white); }
+    .btn-download:hover { background: var(--white); color: var(--bg); }
+
+    .download-version {
+      margin-top: 20px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ─── COMING SOON ───────────────────────────────────────── */
+
+    .callout {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .callout-box {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--cyan);
+      padding: 24px 40px;
+    }
+
+    .callout-box p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .callout-box strong {
+      color: var(--white);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── COMMUNITY ─────────────────────────────────────────── */
+
+    .community {
+      padding: 80px 24px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .community-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-discord { color: var(--purple); }
+    .btn-discord:hover { background: var(--purple); color: var(--bg); }
+
+    .discord-count {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      opacity: 0.8;
+    }
+
+    .discord-count:empty { display: none; }
+
     /* ─── FOOTER ────────────────────────────────────────────── */
 
     footer {
@@ -495,6 +574,57 @@
       </div>
     </div>
   </section>
+
+  <hr class="rule">
+
+  <!-- ─ DOWNLOAD ──────────────────────────────────────────── -->
+  <section class="download">
+    <p class="label">Get the client</p>
+    <div class="download-row">
+      <a href="downloads/ludotrace-mac-x64" class="btn btn-download" download>macOS (Intel)</a>
+      <a href="downloads/ludotrace-mac-arm64" class="btn btn-download" download>macOS (Apple Silicon)</a>
+      <a href="downloads/ludotrace.exe" class="btn btn-download" download>Windows</a>
+      <a href="downloads/ludotrace-linux" class="btn btn-download" download>Linux</a>
+    </div>
+    <p class="download-version">v0.1.0</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ─ COMING SOON ───────────────────────────────────────── -->
+  <section class="callout">
+    <div class="callout-box">
+      <p><strong>The App is coming soon.</strong> Login and viewing your Insights is private-beta only right now. Everything else here — the mods, the client — is live today.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ─ COMMUNITY ─────────────────────────────────────────── -->
+  <section class="community">
+    <p class="label">Join the community</p>
+    <div class="community-row">
+      <a href="https://discord.gg/gmrg2Yk7X6" class="btn btn-discord">Discord</a>
+      <span class="discord-count" id="discord-count" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <script>
+    // Guild ID must match the one behind the invite link above (https://discord.gg/gmrg2Yk7X6).
+    (function () {
+      var controller = new AbortController();
+      var timeout = setTimeout(function () { controller.abort(); }, 5000);
+      fetch('https://discord.com/api/guilds/1522663244110500050/widget.json', { signal: controller.signal })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (d) {
+          if (typeof d.presence_count === 'number') {
+            document.getElementById('discord-count').textContent = d.presence_count + ' online';
+          }
+        })
+        .catch(function () {})
+        .finally(function () { clearTimeout(timeout); });
+    })();
+  </script>
 
   <!-- ─ FOOTER ─────────────────────────────────────────────── -->
   <footer>

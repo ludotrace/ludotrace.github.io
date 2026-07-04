@@ -37,7 +37,7 @@ Markers on the signal: magenta diamonds (`<polygon>`) on peaks, magenta squares 
 
 ## Page sections
 
-Single scroll, in order: hero → one-liner → how it works (3 steps) → current mods → footer.
+Single scroll, in order: hero → one-liner → how it works (3 steps) → current mods → download → coming soon → community → footer.
 
 When adding a new game mod, add a card to the **current mods** section following the same pattern as the Fallout 4 card: left magenta border, game name, status, Nexus + GitHub buttons.
 
