@@ -21,4 +21,4 @@ Deployed via GitHub Pages. Source: `ludotrace.github.io/`.
 
 ## Implemented, not yet validated
 
-- Nothing currently in this state for the site itself
+- "Join the waitlist" CTA in the coming-soon callout, linking to `https://app.ludotrace.com/waitlist` (app repo `lt-app#11`, gitea PR #14). Not live until that app screen ships. Implements `ludotrace.github.io#10`.
