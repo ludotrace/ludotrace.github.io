@@ -50,8 +50,13 @@
         linear-gradient(var(--grid) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid) 1px, transparent 1px);
       background-size: 80px 80px;
+      opacity: var(--grid-fade, 1);
       pointer-events: none;
       z-index: 0;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      body::before { transition: opacity 0.2s ease-out; }
     }
 
     header, section, footer { position: relative; z-index: 1; }
@@ -183,10 +188,6 @@
       color: rgba(255,255,255,0.8);
     }
 
-    /* ─── RULE ──────────────────────────────────────────────── */
-
-    .rule { border: none; border-top: 1px solid var(--rule); }
-
     /* ─── SECTION LABEL ─────────────────────────────────────── */
 
     .label {
@@ -255,8 +256,12 @@
       margin: 0 auto;
     }
 
+    .mods-list { border: 1px solid var(--rule); }
+
+    .mods-list > :last-child { border-bottom: none; }
+
     .mod-card {
-      border: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
       border-left: 3px solid var(--magenta);
       padding: 32px 40px;
       display: flex;
@@ -310,8 +315,6 @@
     .btn-mods:hover { background: var(--cyan); color: var(--bg); }
 
     .mod-contribute {
-      margin-top: 2px;
-      border: 1px solid var(--rule);
       border-left: 3px solid var(--rule);
       padding: 24px 40px;
       display: flex;
@@ -523,7 +526,6 @@
     <p>LudoTrace captures what actually happens when you play — and makes that data useful.</p>
   </section>
 
-  <hr class="rule">
 
   <!-- ─ HOW IT WORKS ──────────────────────────────────────── -->
   <section class="how">
@@ -547,42 +549,42 @@
     </div>
   </section>
 
-  <hr class="rule">
 
   <!-- ─ CURRENT MODS ──────────────────────────────────────── -->
   <section class="mods">
     <p class="label">Supported games</p>
-    <div class="mod-card">
-      <div>
-        <div class="mod-game">Fallout 4</div>
-        <div class="mod-status">Active</div>
+    <div class="mods-list">
+      <div class="mod-card">
+        <div>
+          <div class="mod-game">Fallout 4</div>
+          <div class="mod-status">Active</div>
+        </div>
+        <div class="mod-links">
+          <a href="https://www.nexusmods.com/fallout4/mods/106076" class="btn btn-nexus">Nexus Mods</a>
+          <a href="https://github.com/ludotrace/fallout4" class="btn btn-gh">GitHub</a>
+        </div>
       </div>
-      <div class="mod-links">
-        <a href="https://www.nexusmods.com/fallout4/mods/106076" class="btn btn-nexus">Nexus Mods</a>
-        <a href="https://github.com/ludotrace/fallout4" class="btn btn-gh">GitHub</a>
+      <div class="mod-card">
+        <div>
+          <div class="mod-game">Stardew Valley</div>
+          <div class="mod-status">Active</div>
+        </div>
+        <div class="mod-links">
+          <a href="https://www.nexusmods.com/stardewvalley/mods/48026" class="btn btn-nexus">Nexus Mods</a>
+          <a href="https://github.com/ludotrace/stardew" class="btn btn-gh">GitHub</a>
+        </div>
       </div>
-    </div>
-    <div class="mod-card" style="margin-top: 2px;">
-      <div>
-        <div class="mod-game">Stardew Valley</div>
-        <div class="mod-status">Active</div>
-      </div>
-      <div class="mod-links">
-        <a href="https://www.nexusmods.com/stardewvalley/mods/48026" class="btn btn-nexus">Nexus Mods</a>
-        <a href="https://github.com/ludotrace/stardew" class="btn btn-gh">GitHub</a>
-      </div>
-    </div>
-    <div class="mod-contribute">
-      <div class="mod-contribute-text">
-        <strong>Mods are open source.</strong> Any game that can write to a file can have a LudoTrace mod.
-      </div>
-      <div class="mod-links">
-        <a href="https://github.com/ludotrace/mods" class="btn btn-mods">Build a mod</a>
+      <div class="mod-contribute">
+        <div class="mod-contribute-text">
+          <strong>Mods are open source.</strong> Any game that can write to a file can have a LudoTrace mod.
+        </div>
+        <div class="mod-links">
+          <a href="https://github.com/ludotrace/mods" class="btn btn-mods">Build a mod</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <hr class="rule">
 
   <!-- ─ DOWNLOAD ──────────────────────────────────────────── -->
   <section class="download">
@@ -596,7 +598,6 @@
     <p class="download-version">v0.1.0</p>
   </section>
 
-  <hr class="rule">
 
   <!-- ─ COMING SOON ───────────────────────────────────────── -->
   <section class="callout">
@@ -606,7 +607,6 @@
     </div>
   </section>
 
-  <hr class="rule">
 
   <!-- ─ COMMUNITY ─────────────────────────────────────────── -->
   <section class="community">
@@ -631,6 +631,34 @@
         })
         .catch(function () {})
         .finally(function () { clearTimeout(timeout); });
+    })();
+  </script>
+
+  <script>
+    // Fades the grid overlay (issue #13) as the hero scrolls out of view, so it
+    // doesn't compound with the bordered cards further down the page.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var hero = document.querySelector('.hero');
+      var root = document.documentElement;
+      if (!hero) return;
+      var FLOOR = 0.25;
+      var FADE_FRACTION = 0.35; // reach FLOOR after scrolling this fraction of the hero's height
+      var ticking = false;
+      function update() {
+        var fadeDistance = (hero.offsetHeight || 1) * FADE_FRACTION;
+        var progress = Math.min(Math.max(-hero.getBoundingClientRect().top / fadeDistance, 0), 1);
+        root.style.setProperty('--grid-fade', (1 - progress * (1 - FLOOR)).toFixed(2));
+        ticking = false;
+      }
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
     })();
   </script>
 
