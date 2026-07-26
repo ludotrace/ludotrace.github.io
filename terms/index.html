@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — LudoTrace</title>
+  <meta name="description" content="Terms governing use of LudoTrace.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #12002e;
+      --cyan:    #00e5ff;
+      --magenta: #ff2d78;
+      --purple:  #c77dff;
+      --white:   #ffffff;
+      --grid:    rgba(255,255,255,0.04);
+      --rule:    rgba(255,255,255,0.08);
+      --dim:     rgba(255,255,255,0.7);
+      --muted:   rgba(255,255,255,0.5);
+      --font:    'Courier New', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header, main, footer { position: relative; z-index: 1; }
+
+    header {
+      padding: 40px 24px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    header a.home {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    header a.home .ludo { color: var(--white); }
+    header a.home .trace { color: var(--magenta); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      line-height: 1.7;
+    }
+
+    .updated {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 24px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 40px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    p, li {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 14px;
+    }
+
+    ul { padding-left: 22px; margin-bottom: 14px; }
+
+    strong { color: var(--white); }
+
+    a { color: var(--cyan); }
+
+    .callout {
+      border-left: 3px solid var(--magenta);
+      padding: 14px 18px;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    footer {
+      padding: 40px 24px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+
+    footer a:hover { opacity: 1; }
+
+    footer .dot { font-size: 11px; opacity: 0.5; color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="home" href="/"><span class="ludo">LUDO</span><span class="trace">TRACE</span></a>
+  </header>
+
+  <main>
+    <h1>Terms of Service</h1>
+    <div class="updated">Last updated — July 25, 2026</div>
+
+    <p>
+      These terms govern your use of LudoTrace — the Client, game mods, App, and
+      backend service (collectively, the "Service"), operated by Timbertree Studios, an
+      independently operated project based in Missouri, United States.
+      By creating an account or using the Service, you agree to these terms.
+    </p>
+
+    <div class="callout">
+      LudoTrace is currently in private beta. Features, limits, and pricing described
+      here may change as the product develops; we'll do our best to communicate
+      material changes before they take effect.
+    </div>
+
+    <h2>The service</h2>
+    <p>
+      LudoTrace captures structured gameplay events from a local mod running inside a
+      supported game, uploads them, and generates a written insight about your session
+      using an LLM. Raw event data is discarded after processing — see our
+      <a href="/privacy/">Privacy Policy</a> for the full data-handling details.
+    </p>
+
+    <h2>Accounts</h2>
+    <p>
+      You need an account to use LudoTrace, created via email or a supported
+      third-party sign-in (e.g. Google). You're responsible for keeping access to your
+      account secure and for all activity under it. Access during the private beta may
+      be waitlist- or invite-gated.
+    </p>
+
+    <h2>Subscriptions and billing</h2>
+    <p>
+      LudoTrace offers a free tier and paid subscription tiers with additional usage
+      and features. Paid subscriptions are billed and processed by Stripe. You can
+      manage or cancel your subscription at any time through the billing portal linked
+      in the App. Cancelling stops future billing; it does not retroactively refund
+      the current billing period unless required by law.
+    </p>
+
+    <h2>Game mods and third-party games</h2>
+    <p>
+      LudoTrace's capture mods are open source and run locally inside your game. They
+      read local game/save data to produce the event log the Client uploads — they do
+      not modify game files, interact with anti-cheat systems, or grant any advantage
+      in multiplayer. You're responsible for confirming that using a LudoTrace mod
+      doesn't violate the terms of service of the specific game or platform (e.g.
+      Steam, a game's EULA) you're playing. LudoTrace is not affiliated with, and does
+      not receive any support from, the publishers of the games it supports.
+    </p>
+
+    <h2>Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Use the Service to upload data that isn't genuinely yours or generated by
+        your own gameplay</li>
+      <li>Attempt to abuse, overload, or reverse-engineer the Service's APIs or
+        infrastructure</li>
+      <li>Use the Service for any unlawful purpose</li>
+      <li>Circumvent usage limits or billing associated with your account tier</li>
+    </ul>
+    <p>
+      We may suspend or terminate accounts that violate these terms.
+    </p>
+
+    <h2>Your content</h2>
+    <p>
+      You retain ownership of your gameplay data and the insights generated from it.
+      We process your session data solely to generate your insight and don't use it
+      for any other purpose, as described in the Privacy Policy.
+    </p>
+
+    <h2>Disclaimer of warranties</h2>
+    <p>
+      The Service, including any LLM-generated insight, is provided "as is." Insights
+      are generated automatically and may be inaccurate or incomplete — they're meant
+      to be interesting and useful, not authoritative. We make no warranty that the
+      Service will be uninterrupted, error-free, or available at all times, particularly
+      during the private beta.
+    </p>
+
+    <h2>Limitation of liability</h2>
+    <p>
+      To the maximum extent permitted by law, Timbertree Studios is not liable for any
+      indirect, incidental, or consequential damages arising from your use of the
+      Service. Our total liability for any claim relating to the Service is limited to
+      the amount you paid us in the 12 months preceding the claim.
+    </p>
+
+    <h2>Termination</h2>
+    <p>
+      You can delete your account at any time from the App's account settings, which
+      immediately and permanently removes your data. We may suspend or terminate
+      access to the Service for violation of these terms or, during the private beta,
+      at our discretion with reasonable notice where practical.
+    </p>
+
+    <h2>Governing law</h2>
+    <p>
+      These terms are governed by the laws of the State of Missouri, USA, without
+      regard to its conflict-of-law principles.
+    </p>
+
+    <h2>Changes to these terms</h2>
+    <p>
+      If we make material changes, we'll update the date at the top of this page.
+      Continued use of the Service after a change means you accept the updated terms.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about these terms: <a href="mailto:ludotrace-support@googlegroups.com">ludotrace-support@googlegroups.com</a>
+    </p>
+  </main>
+
+  <footer>
+    <a href="/">Home</a>
+    <span class="dot">·</span>
+    <a href="/privacy/">Privacy Policy</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/ludotrace">github.com/ludotrace</a>
+  </footer>
+
+</body>
+</html>
