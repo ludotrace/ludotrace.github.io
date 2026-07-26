@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — LudoTrace</title>
+  <meta name="description" content="How LudoTrace collects, processes, and discards gameplay data.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #12002e;
+      --cyan:    #00e5ff;
+      --magenta: #ff2d78;
+      --purple:  #c77dff;
+      --white:   #ffffff;
+      --grid:    rgba(255,255,255,0.04);
+      --rule:    rgba(255,255,255,0.08);
+      --dim:     rgba(255,255,255,0.7);
+      --muted:   rgba(255,255,255,0.5);
+      --font:    'Courier New', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header, main, footer { position: relative; z-index: 1; }
+
+    header {
+      padding: 40px 24px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    header a.home {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    header a.home .ludo { color: var(--white); }
+    header a.home .trace { color: var(--magenta); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      line-height: 1.7;
+    }
+
+    .updated {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 24px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 40px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    p, li {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 14px;
+    }
+
+    ul { padding-left: 22px; margin-bottom: 14px; }
+
+    strong { color: var(--white); }
+
+    a { color: var(--cyan); }
+
+    .callout {
+      border-left: 3px solid var(--magenta);
+      padding: 14px 18px;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    footer {
+      padding: 40px 24px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+
+    footer a:hover { opacity: 1; }
+
+    footer .dot { font-size: 11px; opacity: 0.5; color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="home" href="/"><span class="ludo">LUDO</span><span class="trace">TRACE</span></a>
+  </header>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated — July 25, 2026</div>
+
+    <p>
+      LudoTrace ("we," "us," "LudoTrace") is operated by Timbertree Studios, an
+      independently operated project based in Missouri, United States. This policy
+      explains what data LudoTrace collects when you use our Client, mods, and App, how
+      it's processed, and — because this is the part that matters most for LudoTrace
+      specifically — what we <strong>don't</strong> keep.
+    </p>
+
+    <div class="callout">
+      The short version: LudoTrace never stores your raw gameplay trace data. A local
+      mod writes gameplay events to a file on your machine, the Client uploads it, our
+      server processes it into a written insight, and the raw file is discarded
+      immediately after. Only the generated insight — not the underlying event log — is
+      retained.
+    </div>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>Account information</strong> — your email address, via our authentication
+        provider (Clerk). We don't set or store a password ourselves.</li>
+      <li><strong>Gameplay session data</strong> — a local mod running inside your game
+        writes a JSONL event log (session start/end, locations visited, kills, quest
+        progress, and similar structured gameplay events — see the public
+        <a href="https://github.com/ludotrace/mods">mod spec</a> for the exact schema).
+        The Client uploads this file to our server, which processes it, generates your
+        insight, and discards the file. We do not retain the raw event log.</li>
+      <li><strong>Generated insights</strong> — the LLM-written summary produced from your
+        session data is retained in your account until you delete it or your account.</li>
+      <li><strong>Optional integrations</strong> — if you configure a Discord webhook URL
+        in Settings, we store that URL to deliver insights there. We do not access your
+        Discord account beyond posting to that webhook.</li>
+      <li><strong>Billing information</strong> — if you subscribe to a paid plan, payment
+        is handled entirely by Stripe. We never see or store your card details — only
+        your subscription tier and status.</li>
+      <li><strong>Basic operational logs</strong> — standard request/error logs
+        (timestamps, endpoints, response codes) for reliability and debugging, with
+        sensitive values (tokens, IDs) redacted before they're ever written.</li>
+    </ul>
+
+    <h2>How we use it</h2>
+    <p>
+      Your gameplay session data is used for exactly one purpose: generating the
+      insight you see in the App. We do not use your data to train models, sell it, or
+      share it with advertisers. Your email is used for authentication and any
+      account-related communication (e.g. billing receipts, service notices).
+    </p>
+
+    <h2>Third parties we use</h2>
+    <ul>
+      <li><strong>Clerk</strong> — authentication (sign-in, session management)</li>
+      <li><strong>Stripe</strong> — subscription billing and payment processing</li>
+      <li><strong>An LLM provider</strong> (self-hosted or Anthropic's API, depending on
+        configuration) — processes your session data into a written insight. The
+        provider receives the session data needed to generate that specific insight and
+        does not retain it beyond that request.</li>
+      <li><strong>Cloudflare</strong> — network routing and DDoS protection for our
+        infrastructure.</li>
+    </ul>
+    <p>
+      We don't sell your data to anyone, for any reason.
+    </p>
+
+    <h2>Data retention and deletion</h2>
+    <p>
+      Raw gameplay trace data is discarded immediately after processing — it is never
+      retained. Generated insights persist in your account until you delete them or
+      delete your account. You can permanently delete your account and all associated
+      data (insights, settings, billing link) from the App's account settings at any
+      time; deletion is immediate and irreversible.
+    </p>
+
+    <h2>Children's privacy</h2>
+    <p>
+      LudoTrace is not directed at children under 13, and we do not knowingly collect
+      data from them. If you believe a child has created an account, contact us and
+      we'll delete it.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes materially, we'll update the date at the top of this page.
+      Continued use of LudoTrace after a change means you accept the updated policy.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy or your data: <a href="mailto:ludotrace-support@googlegroups.com">ludotrace-support@googlegroups.com</a>
+    </p>
+  </main>
+
+  <footer>
+    <a href="/">Home</a>
+    <span class="dot">·</span>
+    <a href="/terms/">Terms of Service</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/ludotrace">github.com/ludotrace</a>
+  </footer>
+
+</body>
+</html>
