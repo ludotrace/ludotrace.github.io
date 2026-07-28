@@ -54,17 +54,21 @@ pattern: left magenta border, game name, status, Nexus + GitHub buttons.
 
 ## Client downloads
 
-This site doubles as the client binary host and update manifest server:
+Binaries are hosted as GitHub Release assets on `ludotrace/client`, not in this repo. The
+download buttons link straight to
+`github.com/ludotrace/client/releases/latest/download/<asset>`, which always resolves to the
+current release — no site push needed to update them.
+
+This site still serves the update manifest the client checks on startup:
 
 ```
 client/version.json   — update manifest, fetched by the client on startup
-downloads/            — ludotrace.exe, ludotrace-mac-x64, ludotrace-mac-arm64, ludotrace-linux
 ```
 
-**Never edit these by hand, and never commit them from a local build.** The client project's
-release pipeline writes them on every semver tag, and each release overwrites the previous
-binaries. A hand-placed file will be silently replaced, or worse, served to users as a
-signed-for release it isn't.
+**Never edit `client/version.json` by hand, and never commit it from a local build.** The
+client project's release pipeline writes it on every semver tag, pointing at that release's
+GitHub asset URLs and checksums. A hand-placed file will be silently replaced, or worse,
+served to users as a signed-for release it isn't.
 
 ## Deployment
 

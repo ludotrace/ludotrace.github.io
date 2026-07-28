@@ -20,10 +20,9 @@ switch Pages off `build_type: legacy` and break the deploy.
 - Stardew Valley mod card — Nexus Mods and GitHub links
 - Brand assets committed: heartbeat avatar (PNG + SVG), favicon
 - OG/Twitter meta tags wired
-- Client binary hosting — all four binaries in `downloads/`, written by the client release
-  pipeline
+- Download buttons link to GitHub Release assets on `ludotrace/client` (`releases/latest/download/...`)
 - Auto-update manifest — `client/version.json` served live, SHA-256 checksums matching the
-  published binaries
+  binaries attached to the corresponding GitHub Release
 - "Join the waitlist" CTA — links to the app's waitlist screen, which is live and accepting
   signups (#10)
 
