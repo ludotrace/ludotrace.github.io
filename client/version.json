@@ -1,10 +1,11 @@
 {
-  "version": "0.1.7",
+  "version": "0.1.8",
   "next_check_seconds": 86400,
   "platforms": {
-    "darwin/amd64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.7/ludotrace-mac-x64",   "sha256": "ee490685eae05577f93af51a4ca01aff75cfc40f9b3ce58b511aaee00c441f70" },
-    "darwin/arm64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.7/ludotrace-mac-arm64",  "sha256": "f3a052c1af42279412d65f0c4d925a5f842711cf0574f59421adb8c145b5da23" },
-    "windows/amd64": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.7/ludotrace.exe",         "sha256": "89e60c1433b085c5e7d2bcbb93886584f4f6ecb7393c8b99e5633d3796aec17e" },
-    "linux/amd64":   { "url": "https://github.com/ludotrace/client/releases/download/v0.1.7/ludotrace-linux",       "sha256": "a5fd9261c8c42aa01cf1f4543e3c7f8daad65f75d959a73c556c05d5c4964515" }
+    "darwin/amd64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-mac-x64",   "sha256": "06878c692a7793ada79db4b6d91bd2643ea8a015f8eb221c849ec87d2b0bce8d" },
+    "darwin/arm64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-mac-arm64",  "sha256": "b6b81142e64e234d0ec1b0456f315b53545d9f993a7a10e64a888aca519f1b6b" },
+    "windows/amd64": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace.exe",         "sha256": "e2d639b1c73b5b89f057f972f0d141158f48d0d26a8ac6e52bb25ef5f8d9b0e1" },
+    "linux/amd64":   { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-linux",       "sha256": "b11584a9df0f316ea0b7fd8f2c20c417a9779f306fdba68fcb4eccc40fc6db2a" },
+    "linux/amd64-headless": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-linux-headless", "sha256": "648b768dc146990cc3cc7f0775eddf4e22d284cc44eb1a35c82b83d5e105ca2e" }
   }
 }
