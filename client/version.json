@@ -1,11 +1,11 @@
 {
-  "version": "0.1.8",
+  "version": "0.1.9",
   "next_check_seconds": 86400,
   "platforms": {
-    "darwin/amd64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-mac-x64",   "sha256": "06878c692a7793ada79db4b6d91bd2643ea8a015f8eb221c849ec87d2b0bce8d" },
-    "darwin/arm64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-mac-arm64",  "sha256": "b6b81142e64e234d0ec1b0456f315b53545d9f993a7a10e64a888aca519f1b6b" },
-    "windows/amd64": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace.exe",         "sha256": "e2d639b1c73b5b89f057f972f0d141158f48d0d26a8ac6e52bb25ef5f8d9b0e1" },
-    "linux/amd64":   { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-linux",       "sha256": "b11584a9df0f316ea0b7fd8f2c20c417a9779f306fdba68fcb4eccc40fc6db2a" },
-    "linux/amd64-headless": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.8/ludotrace-linux-headless", "sha256": "648b768dc146990cc3cc7f0775eddf4e22d284cc44eb1a35c82b83d5e105ca2e" }
+    "darwin/amd64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.9/ludotrace-mac-x64",   "sha256": "aa5fb3ac62a02aa337ff6e3fc647b016b225deadc08ea1a3c05445ba22a57aca" },
+    "darwin/arm64":  { "url": "https://github.com/ludotrace/client/releases/download/v0.1.9/ludotrace-mac-arm64",  "sha256": "ae17de3c32562c13bdc0aeaa7a31571f59606bd602df5c1cb6d4c493594754d5" },
+    "windows/amd64": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.9/ludotrace.exe",         "sha256": "0274fae1366448b02d7eca305047687bc7227e4a0940e6274af88f2888c5d119" },
+    "linux/amd64":   { "url": "https://github.com/ludotrace/client/releases/download/v0.1.9/ludotrace-linux",       "sha256": "c8cccacebb67c1cedc5c8086173eb737c0c158c70ff44e131159a2f3ee106f1d" },
+    "linux/amd64-headless": { "url": "https://github.com/ludotrace/client/releases/download/v0.1.9/ludotrace-linux-headless", "sha256": "9ed7ec700cd77738fbb48fef95b8bf84e5817966dcbae83b73076c3d103a3b80" }
   }
 }
